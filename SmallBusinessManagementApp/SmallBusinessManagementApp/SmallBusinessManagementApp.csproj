@@ -175,6 +175,7 @@
     <None Include="Properties\DataSources\SmallBusinessManagementApp.Model.Customer.datasource" />
     <None Include="Properties\DataSources\SmallBusinessManagementApp.Model.Product.datasource" />
     <None Include="Properties\DataSources\SmallBusinessManagementApp.Model.Purchase.datasource" />
+    <None Include="Properties\DataSources\SmallBusinessManagementApp.Model.Sales.datasource" />
     <None Include="Properties\DataSources\SmallBusinessManagementApp.Model.Supplier.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

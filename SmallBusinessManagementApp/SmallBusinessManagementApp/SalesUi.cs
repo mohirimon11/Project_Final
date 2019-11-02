@@ -17,9 +17,18 @@ namespace SmallBusinessManagementApp
         SalesManager _salesManager = new SalesManager();
         private Sales sales;
         private Product product;
+        private List<Sales> salesList;
+
         private Customer customer;
         private Purchase purchase;
-        
+        private int SalesId;
+        private int a;
+        private double g_Total;
+        private double LPoint;
+        private double discount;
+        private double loyalityPoint;
+
+
 
 
         public SalesUi()
@@ -29,6 +38,7 @@ namespace SmallBusinessManagementApp
             product = new Product();
             customer=new Customer();
             purchase=new Purchase();
+            salesList = new List<Sales>();
         }
        
 
@@ -36,57 +46,62 @@ namespace SmallBusinessManagementApp
         {
             if (IsFormValid())
             {
+                
+                sales =new Sales();
 
-                int availableQuantity = Convert.ToInt32(availableQualityTextBox.Text);
 
-                purchase.Quantity = Convert.ToInt32(qualityTextBox.Text);
-                sales.Loyality_Point = Convert.ToInt32(loyalityPointTextBox.Text);
-                sales.MRP = Convert.ToDouble(mrpTextBox.Text);
-
-                //purchase.Supplier_id = Convert.ToInt32(supplierComboBox.SelectedValue);
-                sales.Category_Id = Convert.ToInt32(categoryComboBox.SelectedValue);
+                sales.ProductName = productComboBox.Text;
                 sales.Product_Id = Convert.ToInt32(productComboBox.SelectedValue);
-                sales.Customer_Id = Convert.ToInt32(customerComboBox.SelectedValue);
-                //purchase.Product_id = Convert.ToInt32(productsComboBox.SelectedValue);
-                //purchase.InvoiceNo = invoiceNoTextBox.Text;
-                //purchase.Date1 = DateTime.Now;
-                //purchase.Manufacture_Date = manufactureDateTimePicker.Value;
-                //purchase.Expire_Date = ExpireDateTimePicker.Value;
-                //purchase.MRP = Convert.ToDouble(mrpTextBox.Text);
-                //purchase.Remarks = remarksTextBox.Text;
+                sales.Quantity = Convert.ToInt32(qualityTextBox.Text);
+                sales.MRP = Convert.ToDouble(mrpTextBox.Text);
+                sales.TotalMrp = Convert.ToDouble(totalMRPTextBox.Text);
+                sales.CustomerName = customerComboBox.Text;
+                sales.Date1=DateTime.Now;
+                sales.Sales_Id = SalesId;
+                sales.TotalMrp = Convert.ToDouble(totalMRPTextBox.Text);
+
+                salesList.Add(sales);
+                showDataGridView.DataSource = null;
+                showDataGridView.DataSource = salesList;
 
 
+                foreach (DataGridViewRow row in showDataGridView.Rows)
+                {
+                    row.Cells["SL"].Value = (row.Index + 1).ToString();
+                }
+                decimal Total = 0;
 
-                purchase.Quantity = availableQuantity - purchase.Quantity;
-                sales.TotalMrp = purchase.Quantity * sales.MRP;
-                sales.Date1 = DateTime.Now;
+                for (int i = 0; i < showDataGridView.Rows.Count; i++)
+                {
+                    Total += Convert.ToDecimal(showDataGridView.Rows[i].Cells["totalMrpDataGridViewTextBoxColumn"].Value);
+                }
 
-
-                //stock.Quantity = availableQuantity + stockInQuantity;
-                //stock.Date = DateTime.Now;
-                //stock.Status = "Stock In";
+                g_Total = Convert.ToDouble(Total);
+                grandTotalTextBox.Text = g_Total.ToString();
+                LPoint = g_Total / 1000;
 
                 try
                 {
-
-
-                    int isExecuted = _salesManager.PurchaseAdd(sales);
-                    if (isExecuted > 0)
+                    if (String.IsNullOrEmpty(loyalityPointTextBox.Text))
                     {
-                        MessageBox.Show("Save Successful.");
-
-                        //Reset();
-                        //DisplayStock();
+                        MessageBox.Show("Select Customer first!");
                     }
                     else
                     {
-                        MessageBox.Show("Save Failed!");
+                        discount = Convert.ToDouble(loyalityPointTextBox.Text) / 10;
+
                     }
                 }
-                catch (Exception ex)
+                catch (Exception exception)
                 {
-                    MessageBox.Show(ex.Message);
+                    MessageBox.Show(exception.Message);
                 }
+                discountTextBox.Text = discount.ToString();
+                discountAmounTextBox.Text = (g_Total * discount / 100).ToString();
+                double c = Convert.ToDouble(loyalityPointTextBox.Text) - Convert.ToDouble(discountTextBox.Text);
+                payableAmountTextBox.Text = (g_Total - Convert.ToDouble(discountAmounTextBox.Text)).ToString();
+                loyalityPoint = LPoint + c;
+
             }
 
         }
@@ -101,6 +116,7 @@ namespace SmallBusinessManagementApp
             categoryComboBox.Text = "-select-";
             //For Product
             productComboBox.Text = "-select-";
+            loyalityPointTextBox.Text="<View>";
 
             availableQualityTextBox.Text = "<View>";
             totalMRPTextBox.Text = "<View>";
@@ -108,6 +124,9 @@ namespace SmallBusinessManagementApp
             discountTextBox.Text = "<View>";
             discountAmounTextBox.Text = "<View>";
             payableAmountTextBox.Text = "<View>";
+            mrpTextBox.Text = "<View>";
+            pTotalLable.Text = "";
+            sTotalLable.Text = "";
             mrpTextBox.Text = "<View>";
 
 
@@ -118,6 +137,13 @@ namespace SmallBusinessManagementApp
         private void customerComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             LoyaLityPoint();
+            LoadSaleId();
+        }
+        private void LoadSaleId()
+        {
+            sales.CustomerName = customerComboBox.Text;
+            //int PurchaseId = 0;
+            SalesId = Convert.ToInt32(_salesManager.LoadSalesId(sales));
         }
         private void categoryComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -126,11 +152,17 @@ namespace SmallBusinessManagementApp
             productComboBox.DisplayMember = "Name";
             productComboBox.ValueMember = "Id";
             productComboBox.Text = "-select-";
+            pTotalLable.Text = "";
+            sTotalLable.Text = "";
+            mrpTextBox.Text = "<View>";
 
         }
         private void productComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            LoadQuantity();
+
+
+            LoadQuantity(); 
+            
             LoaMRP();
         }
 
@@ -144,18 +176,20 @@ namespace SmallBusinessManagementApp
 
         private void LoadQuantity()
         {
-            purchase.ProductName = productComboBox.Text;
+            sales.ProductName = productComboBox.Text;
             availableQualityTextBox.Text = "0";
-            availableQualityTextBox.Text = _salesManager.LoadQuantity(purchase);
+            pTotalLable.Text = _salesManager.PurchaseQuantity(sales);
+            sTotalLable.Text = _salesManager.saleQuantity(sales);
+
         }
 
         private void LoaMRP()
         {
             purchase.ProductName = productComboBox.Text;
             mrpTextBox.Text = "0";
-            mrpTextBox.Text = _salesManager.LoadMRP(purchase);
+            mrpTextBox.Text = _salesManager.LoadMRP(sales);
         }
-        
+
 
         private bool IsFormValid()
         {
@@ -220,13 +254,7 @@ namespace SmallBusinessManagementApp
                     int Quantity = Convert.ToInt32(qualityTextBox.Text);
                     totalMRPTextBox.Text = (MRP * Quantity).ToString();
                     double TotalMRP = Convert.ToDouble(totalMRPTextBox.Text);
-                    grandTotalTextBox.Text = totalMRPTextBox.Text;
-                    double grandTotal = Convert.ToDouble(grandTotalTextBox.Text);
-                    discountTextBox.Text = (grandTotal / 1000).ToString();
-                    double discount = Convert.ToDouble(discountTextBox.Text);
-                    discountAmounTextBox.Text = (TotalMRP * discount / 100).ToString();
-                    double DiscountAmount = Convert.ToDouble(discountAmounTextBox.Text);
-                    payableAmountTextBox.Text = (TotalMRP - DiscountAmount).ToString();
+                   
                     
                 }
 
@@ -238,5 +266,99 @@ namespace SmallBusinessManagementApp
            
 
         }
+
+        private void loadTotalQuantityButton_Click(object sender, EventArgs e)
+        {
+            LoadQuantity();
+            int a = Convert.ToInt32(pTotalLable.Text);
+            int b = Convert.ToInt32(sTotalLable.Text);
+            int avalable = a - b;
+            availableQualityTextBox.Text =Convert.ToString(avalable);
+        }
+        private void addSale()
+        {
+            purchase = new Purchase();
+
+            // purchase.Date1 = Convert.ToDateTime(row.Cells["date1DataGridViewTextBoxColumn"].Value.ToString());
+            sales.Date1 = DateTime.Now;
+            a++;
+            string text = "2019-00";
+            string code = text + Convert.ToInt32(a);
+            sales.Code = code;
+           // purchase.InvoiceNo = invoiceNoTextBox.Text;
+           sales.Customer_Id = Convert.ToInt32(customerComboBox.SelectedValue);
+           // purchase.Supplier_id = Convert.ToInt32(supplierComboBox.SelectedValue);
+            // purchase.Code = row.Cells["codeDataGridViewTextBoxColumn"].Value.ToString();
+
+            product.Id = sales.Product_Id;
+            product.Id = purchase.Product_id;
+
+
+            int isExecuted = 0;
+
+            //isExecuted = _purchaseManager.addPurchase(purchase);
+            isExecuted = _salesManager.addSale(sales);
+
+            if (isExecuted > 0)
+            {
+                //messageLabel.Text = "Save Successful.";
+                MessageBox.Show("Save Successful");
+            }
+            else
+            {
+                // messageLabel.Text = "Save Failed!";
+                MessageBox.Show("Save Failed!");
+            }
+
+        }
+
+        private void saleAddButton_Click(object sender, EventArgs e)
+        {
+            addSale();
+        }
+
+        private void submitButton_Click(object sender, EventArgs e)
+        {
+            Sell();
+        }
+        private void Sell()
+        {
+           
+            sales =new Sales();
+            foreach (DataGridViewRow row in showDataGridView.Rows)
+            {
+
+                sales.Loyality_Point = loyalityPoint;
+                sales.Sales_Id = SalesId;
+                sales.CustomerName = customerComboBox.Text;
+                sales.Product_Id = Convert.ToInt32(row.Cells["productIdDataGridViewTextBoxColumn"].Value.ToString());
+                sales.Quantity = Convert.ToInt32(row.Cells["quantityDataGridViewTextBoxColumn"].Value.ToString());
+                sales.MRP = Convert.ToInt32(row.Cells["mRPDataGridViewTextBoxColumn"].Value.ToString());
+           
+                product.Id = purchase.Product_id;
+
+
+                int isExecuted = 0;
+
+                isExecuted = _salesManager.Sell(sales);
+                isExecuted = _salesManager.loyalityUpdate(sales);
+
+                if (isExecuted > 0)
+                {
+                    //messageLabel.Text = "Save Successful.";
+                    MessageBox.Show("Save Successful");
+                }
+                else
+                {
+                    // messageLabel.Text = "Save Failed!";
+                    MessageBox.Show("Save Failed!");
+                }
+            }
+
+            salesList = new List<Sales>();
+            showDataGridView.DataSource = null;
+            showDataGridView.DataSource = salesList;
+        }
+
     }
 }

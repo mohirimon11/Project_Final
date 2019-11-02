@@ -38,7 +38,6 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.warningLabel = new System.Windows.Forms.Label();
             this.purchaseButton = new System.Windows.Forms.Button();
             this.submitButton = new System.Windows.Forms.Button();
             this.ExpireDateTimePicker = new System.Windows.Forms.DateTimePicker();
@@ -73,7 +72,6 @@
             this.purchaseBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.showDataGridView = new System.Windows.Forms.DataGridView();
             this.SL = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.purchaseIdDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.manufactureDateDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.expireDateDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.quantityDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -82,6 +80,7 @@
             this.mRPDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.remarksDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.date1DataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.purchaseIdDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.prouctCodeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.invoiceNoDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.codeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -91,6 +90,7 @@
             this.productidDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.productNameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.date2DataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.warningLabel = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.supplierBindingSource)).BeginInit();
             this.groupBox2.SuspendLayout();
@@ -210,14 +210,6 @@
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Products";
-            // 
-            // warningLabel
-            // 
-            this.warningLabel.AutoSize = true;
-            this.warningLabel.Location = new System.Drawing.Point(563, 66);
-            this.warningLabel.Name = "warningLabel";
-            this.warningLabel.Size = new System.Drawing.Size(0, 13);
-            this.warningLabel.TabIndex = 6;
             // 
             // purchaseButton
             // 
@@ -491,7 +483,6 @@
             this.showDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.showDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.SL,
-            this.purchaseIdDataGridViewTextBoxColumn,
             this.manufactureDateDataGridViewTextBoxColumn,
             this.expireDateDataGridViewTextBoxColumn,
             this.quantityDataGridViewTextBoxColumn,
@@ -500,6 +491,7 @@
             this.mRPDataGridViewTextBoxColumn,
             this.remarksDataGridViewTextBoxColumn,
             this.date1DataGridViewTextBoxColumn,
+            this.purchaseIdDataGridViewTextBoxColumn,
             this.prouctCodeDataGridViewTextBoxColumn,
             this.invoiceNoDataGridViewTextBoxColumn,
             this.codeDataGridViewTextBoxColumn,
@@ -521,14 +513,6 @@
             this.SL.HeaderText = "SL";
             this.SL.Name = "SL";
             this.SL.ReadOnly = true;
-            // 
-            // purchaseIdDataGridViewTextBoxColumn
-            // 
-            this.purchaseIdDataGridViewTextBoxColumn.DataPropertyName = "Purchase_Id";
-            this.purchaseIdDataGridViewTextBoxColumn.HeaderText = "Purchase_Id";
-            this.purchaseIdDataGridViewTextBoxColumn.Name = "purchaseIdDataGridViewTextBoxColumn";
-            this.purchaseIdDataGridViewTextBoxColumn.ReadOnly = true;
-            this.purchaseIdDataGridViewTextBoxColumn.Visible = false;
             // 
             // manufactureDateDataGridViewTextBoxColumn
             // 
@@ -586,6 +570,14 @@
             this.date1DataGridViewTextBoxColumn.Name = "date1DataGridViewTextBoxColumn";
             this.date1DataGridViewTextBoxColumn.ReadOnly = true;
             this.date1DataGridViewTextBoxColumn.Visible = false;
+            // 
+            // purchaseIdDataGridViewTextBoxColumn
+            // 
+            this.purchaseIdDataGridViewTextBoxColumn.DataPropertyName = "Purchase_Id";
+            this.purchaseIdDataGridViewTextBoxColumn.HeaderText = "Purchase_Id";
+            this.purchaseIdDataGridViewTextBoxColumn.Name = "purchaseIdDataGridViewTextBoxColumn";
+            this.purchaseIdDataGridViewTextBoxColumn.ReadOnly = true;
+            this.purchaseIdDataGridViewTextBoxColumn.Visible = false;
             // 
             // prouctCodeDataGridViewTextBoxColumn
             // 
@@ -658,6 +650,14 @@
             this.date2DataGridViewTextBoxColumn.ReadOnly = true;
             this.date2DataGridViewTextBoxColumn.Visible = false;
             // 
+            // warningLabel
+            // 
+            this.warningLabel.AutoSize = true;
+            this.warningLabel.Location = new System.Drawing.Point(563, 66);
+            this.warningLabel.Name = "warningLabel";
+            this.warningLabel.Size = new System.Drawing.Size(0, 13);
+            this.warningLabel.TabIndex = 6;
+            // 
             // PurchaseUi
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -726,9 +726,7 @@
         private System.Windows.Forms.BindingSource purchaseBindingSource;
         private System.Windows.Forms.Button purchaseButton;
         private System.Windows.Forms.DataGridView showDataGridView;
-        private System.Windows.Forms.Label warningLabel;
         private System.Windows.Forms.DataGridViewTextBoxColumn SL;
-        private System.Windows.Forms.DataGridViewTextBoxColumn purchaseIdDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn manufactureDateDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn expireDateDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn quantityDataGridViewTextBoxColumn;
@@ -737,6 +735,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn mRPDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn remarksDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn date1DataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn purchaseIdDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn prouctCodeDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn invoiceNoDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn codeDataGridViewTextBoxColumn;
@@ -746,5 +745,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn productidDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn productNameDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn date2DataGridViewTextBoxColumn;
+        private System.Windows.Forms.Label warningLabel;
     }
 }

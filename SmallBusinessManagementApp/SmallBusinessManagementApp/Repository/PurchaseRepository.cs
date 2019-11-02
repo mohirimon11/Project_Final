@@ -11,7 +11,7 @@ namespace SmallBusinessManagementApp.Repository
 {
     public class PurchaseRepository
     {
-        public string connectionString = @"Server=DESKTOP-V33KTP1; Database=SMS_RAMPAGE; Integrated Security=True";
+        public string connectionString = @"Server=DESKTOP-CR4IGJV; Database=SMS_RAMPAGE; Integrated Security=True";
 
         SqlConnection sqlConnection;
         private string commandString;

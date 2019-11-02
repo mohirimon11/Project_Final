@@ -30,6 +30,7 @@
         {
             this.components = new System.ComponentModel.Container();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.saleAddButton = new System.Windows.Forms.Button();
             this.salesDateTimePicker = new System.Windows.Forms.DateTimePicker();
             this.loyalityPointTextBox = new System.Windows.Forms.TextBox();
             this.customerComboBox = new System.Windows.Forms.ComboBox();
@@ -38,6 +39,7 @@
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.loadTotalQuantityButton = new System.Windows.Forms.Button();
             this.quantityLable = new System.Windows.Forms.Label();
             this.productComboBox = new System.Windows.Forms.ComboBox();
             this.productBindingSource = new System.Windows.Forms.BindingSource(this.components);
@@ -54,10 +56,26 @@
             this.label7 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
+            this.sTotalLable = new System.Windows.Forms.Label();
+            this.pTotalLable = new System.Windows.Forms.Label();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.discountAmounTextBox = new System.Windows.Forms.TextBox();
             this.submitButton = new System.Windows.Forms.Button();
             this.showDataGridView = new System.Windows.Forms.DataGridView();
+            this.SL = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.salesIdDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.productIdDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.quantityDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.mRPDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.totalMrpDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.productNameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.customerIdDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.customerNameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.date1DataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.loyalityPointDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.categoryIdDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.date2DataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.salesBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.grandTotalTextBox = new System.Windows.Forms.TextBox();
             this.label11 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
@@ -72,10 +90,12 @@
             ((System.ComponentModel.ISupportInitialize)(this.categoryBindingSource)).BeginInit();
             this.groupBox3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.showDataGridView)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.salesBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.saleAddButton);
             this.groupBox1.Controls.Add(this.salesDateTimePicker);
             this.groupBox1.Controls.Add(this.loyalityPointTextBox);
             this.groupBox1.Controls.Add(this.customerComboBox);
@@ -88,6 +108,16 @@
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Customer";
+            // 
+            // saleAddButton
+            // 
+            this.saleAddButton.Location = new System.Drawing.Point(252, 37);
+            this.saleAddButton.Name = "saleAddButton";
+            this.saleAddButton.Size = new System.Drawing.Size(75, 23);
+            this.saleAddButton.TabIndex = 4;
+            this.saleAddButton.Text = "SaleAdd";
+            this.saleAddButton.UseVisualStyleBackColor = true;
+            this.saleAddButton.Click += new System.EventHandler(this.saleAddButton_Click);
             // 
             // salesDateTimePicker
             // 
@@ -149,6 +179,7 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.loadTotalQuantityButton);
             this.groupBox2.Controls.Add(this.quantityLable);
             this.groupBox2.Controls.Add(this.productComboBox);
             this.groupBox2.Controls.Add(this.categoryComboBox);
@@ -169,6 +200,16 @@
             this.groupBox2.TabIndex = 0;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Product";
+            // 
+            // loadTotalQuantityButton
+            // 
+            this.loadTotalQuantityButton.Location = new System.Drawing.Point(251, 17);
+            this.loadTotalQuantityButton.Name = "loadTotalQuantityButton";
+            this.loadTotalQuantityButton.Size = new System.Drawing.Size(75, 23);
+            this.loadTotalQuantityButton.TabIndex = 6;
+            this.loadTotalQuantityButton.Text = "Load";
+            this.loadTotalQuantityButton.UseVisualStyleBackColor = true;
+            this.loadTotalQuantityButton.Click += new System.EventHandler(this.loadTotalQuantityButton_Click);
             // 
             // quantityLable
             // 
@@ -308,6 +349,25 @@
             this.label2.TabIndex = 0;
             this.label2.Text = "Product";
             // 
+            // sTotalLable
+            // 
+            this.sTotalLable.AutoSize = true;
+            this.sTotalLable.Enabled = false;
+            this.sTotalLable.Location = new System.Drawing.Point(775, 439);
+            this.sTotalLable.Name = "sTotalLable";
+            this.sTotalLable.Size = new System.Drawing.Size(0, 13);
+            this.sTotalLable.TabIndex = 5;
+            // 
+            // pTotalLable
+            // 
+            this.pTotalLable.AutoSize = true;
+            this.pTotalLable.CausesValidation = false;
+            this.pTotalLable.Enabled = false;
+            this.pTotalLable.Location = new System.Drawing.Point(772, 415);
+            this.pTotalLable.Name = "pTotalLable";
+            this.pTotalLable.Size = new System.Drawing.Size(0, 13);
+            this.pTotalLable.TabIndex = 4;
+            // 
             // groupBox3
             // 
             this.groupBox3.Controls.Add(this.discountAmounTextBox);
@@ -322,7 +382,7 @@
             this.groupBox3.Controls.Add(this.label14);
             this.groupBox3.Location = new System.Drawing.Point(361, 21);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(427, 354);
+            this.groupBox3.Size = new System.Drawing.Size(427, 378);
             this.groupBox3.TabIndex = 0;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Product Details";
@@ -343,14 +403,127 @@
             this.submitButton.TabIndex = 2;
             this.submitButton.Text = "Submit";
             this.submitButton.UseVisualStyleBackColor = true;
+            this.submitButton.Click += new System.EventHandler(this.submitButton_Click);
             // 
             // showDataGridView
             // 
+            this.showDataGridView.AllowUserToAddRows = false;
+            this.showDataGridView.AutoGenerateColumns = false;
             this.showDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.showDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.SL,
+            this.salesIdDataGridViewTextBoxColumn,
+            this.productIdDataGridViewTextBoxColumn,
+            this.quantityDataGridViewTextBoxColumn,
+            this.mRPDataGridViewTextBoxColumn,
+            this.totalMrpDataGridViewTextBoxColumn,
+            this.productNameDataGridViewTextBoxColumn,
+            this.customerIdDataGridViewTextBoxColumn,
+            this.customerNameDataGridViewTextBoxColumn,
+            this.date1DataGridViewTextBoxColumn,
+            this.loyalityPointDataGridViewTextBoxColumn,
+            this.categoryIdDataGridViewTextBoxColumn,
+            this.date2DataGridViewTextBoxColumn});
+            this.showDataGridView.DataSource = this.salesBindingSource;
             this.showDataGridView.Location = new System.Drawing.Point(7, 20);
             this.showDataGridView.Name = "showDataGridView";
+            this.showDataGridView.ReadOnly = true;
             this.showDataGridView.Size = new System.Drawing.Size(414, 155);
             this.showDataGridView.TabIndex = 0;
+            // 
+            // SL
+            // 
+            this.SL.HeaderText = "SL";
+            this.SL.Name = "SL";
+            this.SL.ReadOnly = true;
+            // 
+            // salesIdDataGridViewTextBoxColumn
+            // 
+            this.salesIdDataGridViewTextBoxColumn.DataPropertyName = "Sales_Id";
+            this.salesIdDataGridViewTextBoxColumn.HeaderText = "Sales_Id";
+            this.salesIdDataGridViewTextBoxColumn.Name = "salesIdDataGridViewTextBoxColumn";
+            this.salesIdDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // productIdDataGridViewTextBoxColumn
+            // 
+            this.productIdDataGridViewTextBoxColumn.DataPropertyName = "Product_Id";
+            this.productIdDataGridViewTextBoxColumn.HeaderText = "Product_Id";
+            this.productIdDataGridViewTextBoxColumn.Name = "productIdDataGridViewTextBoxColumn";
+            this.productIdDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // quantityDataGridViewTextBoxColumn
+            // 
+            this.quantityDataGridViewTextBoxColumn.DataPropertyName = "Quantity";
+            this.quantityDataGridViewTextBoxColumn.HeaderText = "Quantity";
+            this.quantityDataGridViewTextBoxColumn.Name = "quantityDataGridViewTextBoxColumn";
+            this.quantityDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // mRPDataGridViewTextBoxColumn
+            // 
+            this.mRPDataGridViewTextBoxColumn.DataPropertyName = "MRP";
+            this.mRPDataGridViewTextBoxColumn.HeaderText = "MRP";
+            this.mRPDataGridViewTextBoxColumn.Name = "mRPDataGridViewTextBoxColumn";
+            this.mRPDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // totalMrpDataGridViewTextBoxColumn
+            // 
+            this.totalMrpDataGridViewTextBoxColumn.DataPropertyName = "TotalMrp";
+            this.totalMrpDataGridViewTextBoxColumn.HeaderText = "TotalMrp";
+            this.totalMrpDataGridViewTextBoxColumn.Name = "totalMrpDataGridViewTextBoxColumn";
+            this.totalMrpDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // productNameDataGridViewTextBoxColumn
+            // 
+            this.productNameDataGridViewTextBoxColumn.DataPropertyName = "ProductName";
+            this.productNameDataGridViewTextBoxColumn.HeaderText = "ProductName";
+            this.productNameDataGridViewTextBoxColumn.Name = "productNameDataGridViewTextBoxColumn";
+            this.productNameDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // customerIdDataGridViewTextBoxColumn
+            // 
+            this.customerIdDataGridViewTextBoxColumn.DataPropertyName = "Customer_Id";
+            this.customerIdDataGridViewTextBoxColumn.HeaderText = "Customer_Id";
+            this.customerIdDataGridViewTextBoxColumn.Name = "customerIdDataGridViewTextBoxColumn";
+            this.customerIdDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // customerNameDataGridViewTextBoxColumn
+            // 
+            this.customerNameDataGridViewTextBoxColumn.DataPropertyName = "CustomerName";
+            this.customerNameDataGridViewTextBoxColumn.HeaderText = "CustomerName";
+            this.customerNameDataGridViewTextBoxColumn.Name = "customerNameDataGridViewTextBoxColumn";
+            this.customerNameDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // date1DataGridViewTextBoxColumn
+            // 
+            this.date1DataGridViewTextBoxColumn.DataPropertyName = "Date1";
+            this.date1DataGridViewTextBoxColumn.HeaderText = "Date1";
+            this.date1DataGridViewTextBoxColumn.Name = "date1DataGridViewTextBoxColumn";
+            this.date1DataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // loyalityPointDataGridViewTextBoxColumn
+            // 
+            this.loyalityPointDataGridViewTextBoxColumn.DataPropertyName = "Loyality_Point";
+            this.loyalityPointDataGridViewTextBoxColumn.HeaderText = "Loyality_Point";
+            this.loyalityPointDataGridViewTextBoxColumn.Name = "loyalityPointDataGridViewTextBoxColumn";
+            this.loyalityPointDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // categoryIdDataGridViewTextBoxColumn
+            // 
+            this.categoryIdDataGridViewTextBoxColumn.DataPropertyName = "Category_Id";
+            this.categoryIdDataGridViewTextBoxColumn.HeaderText = "Category_Id";
+            this.categoryIdDataGridViewTextBoxColumn.Name = "categoryIdDataGridViewTextBoxColumn";
+            this.categoryIdDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // date2DataGridViewTextBoxColumn
+            // 
+            this.date2DataGridViewTextBoxColumn.DataPropertyName = "Date2";
+            this.date2DataGridViewTextBoxColumn.HeaderText = "Date2";
+            this.date2DataGridViewTextBoxColumn.Name = "date2DataGridViewTextBoxColumn";
+            this.date2DataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // salesBindingSource
+            // 
+            this.salesBindingSource.DataSource = typeof(SmallBusinessManagementApp.Model.Sales);
             // 
             // grandTotalTextBox
             // 
@@ -418,7 +591,9 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.groupBox3);
+            this.Controls.Add(this.sTotalLable);
             this.Controls.Add(this.groupBox2);
+            this.Controls.Add(this.pTotalLable);
             this.Controls.Add(this.groupBox1);
             this.Name = "SalesUi";
             this.Text = "Sales";
@@ -433,7 +608,9 @@
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.showDataGridView)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.salesBindingSource)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -476,5 +653,23 @@
         private System.Windows.Forms.BindingSource categoryBindingSource;
         private System.Windows.Forms.TextBox discountAmounTextBox;
         private System.Windows.Forms.Label quantityLable;
+        private System.Windows.Forms.Label sTotalLable;
+        private System.Windows.Forms.Label pTotalLable;
+        private System.Windows.Forms.Button loadTotalQuantityButton;
+        private System.Windows.Forms.DataGridViewTextBoxColumn SL;
+        private System.Windows.Forms.DataGridViewTextBoxColumn salesIdDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn productIdDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn quantityDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn mRPDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn totalMrpDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn productNameDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn customerIdDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn customerNameDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn date1DataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn loyalityPointDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn categoryIdDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn date2DataGridViewTextBoxColumn;
+        private System.Windows.Forms.BindingSource salesBindingSource;
+        private System.Windows.Forms.Button saleAddButton;
     }
 }

@@ -12,10 +12,7 @@ namespace SmallBusinessManagementApp.BLL
     public class SalesManager
     {
         SalesRepository _salesRepository = new SalesRepository();
-        public string LoadQuantity(Sales sales)
-        {
-            return _salesRepository.LoadQuantity(sales);
-        }
+       
 
         public string LoyaLityPoint(Customer customer)
         {
@@ -38,16 +35,48 @@ namespace SmallBusinessManagementApp.BLL
         {
             return _salesRepository.LoadProduct(Category_Id);
         }
-
-        public string LoadQuantity(Purchase purchase)
+        public string saleQuantity(Sales sales)
         {
-            return _salesRepository.LoadQuantity(purchase);
+            return _salesRepository.saleQuantity(sales);
         }
 
-        public string LoadMRP(Purchase purchase)
+        public string PurchaseQuantity(Sales sales)
         {
-            return _salesRepository.LoadMRP(purchase);
+            return _salesRepository.PurchaseQuantity(sales);
         }
+
+        //public string LoadQuantity(Purchase purchase)
+        //{
+        //    return _salesRepository.LoadQuantity(purchase);
+        //}
+
+        public string LoadMRP(Sales sales)
+        {
+            return _salesRepository.LoadMRP(sales);
+        }
+
+        public int addSale(Sales sales)
+        {
+            return _salesRepository.addSale(sales);
+        }
+
+        public string LoadSalesId(Sales sales)
+        {
+            return _salesRepository.LoadSalesId(sales);
+        }
+
+        public int Sell(Sales sales)
+        {
+            return _salesRepository.Sell(sales);
+        }
+
+        public int loyalityUpdate(Sales sales)
+        {
+            return _salesRepository.loyalityUpdate(sales);
+        }
+
+
+
 
 
 

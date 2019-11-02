@@ -11,32 +11,32 @@ namespace SmallBusinessManagementApp.Repository
 {
     public class SalesRepository
     {
-        public string connectionString = @"Server=DESKTOP-V33KTP1; Database=SMS_RAMPAGE; Integrated Security=True";
+        public string connectionString = @"Server=DESKTOP-CR4IGJV; Database=SMS_RAMPAGE; Integrated Security=True";
 
         SqlConnection sqlConnection;
         private string commandString;
         private SqlCommand sqlCommand;
         SqlDataReader reader;
-        public string LoadQuantity(Sales sales)
-        {
-            sqlConnection = new SqlConnection(connectionString);
-            commandString = @"select Purchase.Quantity from Purchase left join Product on Purchase.Product_id = Product.Id where Product.Name = '" + sales.ProductName + "'";
-            sqlCommand = new SqlCommand(commandString, sqlConnection);
-            if (sqlConnection.State == ConnectionState.Closed)
-            {
-                sqlConnection.Open();
-            }
+        //public string LoadQuantity(Sales sales)
+        //{
+        //    sqlConnection = new SqlConnection(connectionString);
+        //    commandString = @"select Purchase.Quantity from Purchase left join Product on Purchase.Product_id = Product.Id where Product.Name = '" + sales.ProductName + "'";
+        //    sqlCommand = new SqlCommand(commandString, sqlConnection);
+        //    if (sqlConnection.State == ConnectionState.Closed)
+        //    {
+        //        sqlConnection.Open();
+        //    }
 
-            reader = sqlCommand.ExecuteReader();
-            while (reader.Read())
-            {
-                availableQuantity = (reader["Quantity"]).ToString();
-            }
+        //    reader = sqlCommand.ExecuteReader();
+        //    while (reader.Read())
+        //    {
+        //        availableQuantity = (reader["Quantity"]).ToString();
+        //    }
 
-            sqlConnection.Close();
+        //    sqlConnection.Close();
 
-            return availableQuantity;
-        }
+        //    return availableQuantity;
+        //}
 
         public DataTable LoadCustomerLoad()
         {
@@ -116,11 +116,54 @@ namespace SmallBusinessManagementApp.Repository
 
             return loyality;
         }
-        string availableQuantity;
-        public string LoadQuantity(Purchase purchase)
+        //public string LoadQuantity(Purchase purchase)
+        //{
+        //    sqlConnection = new SqlConnection(connectionString);
+        //    commandString = @"select Purchase.Quantity from Purchase left join Product on Purchase.Product_id = Product.Id where Product.Name = '" + purchase.ProductName + "'";
+        //    sqlCommand = new SqlCommand(commandString, sqlConnection);
+        //    if (sqlConnection.State == ConnectionState.Closed)
+        //    {
+        //        sqlConnection.Open();
+        //    }
+
+        //    reader = sqlCommand.ExecuteReader();
+        //    while (reader.Read())
+        //    {
+        //        availableQuantity = (reader["Quantity"]).ToString();
+        //    }
+
+        //    sqlConnection.Close();
+
+        //    return availableQuantity;
+        //}
+        string saleTotalQuantity;
+
+        public string saleQuantity(Sales sales)
         {
             sqlConnection = new SqlConnection(connectionString);
-            commandString = @"select Purchase_Details.Quantity from Purchase_Details left join Product on Purchase_Details.Product_id = Product.Id where Product.Name = '" + purchase.ProductName + "'";
+           // SELECT SUM(Quantity) AS TotalQuanity FROM Sales_Details where Product_Id = 5
+            commandString = @"select sum(Sales_Details.Quantity) as saleTotal from Sales_Details left join Product on sales_Details.Product_Id = Product.Id where Name='"+sales.ProductName+"' ";
+            sqlCommand = new SqlCommand(commandString,sqlConnection);
+            if (sqlConnection.State==ConnectionState.Closed)
+            {
+                sqlConnection.Open();
+            }
+
+            reader = sqlCommand.ExecuteReader();
+            while (reader.Read())
+            {
+                saleTotalQuantity = (reader["saleTotal"].ToString());
+            }
+            sqlConnection.Close();
+            return saleTotalQuantity;
+        }
+
+        public string purchaseTotalQuantity;
+        public string PurchaseQuantity(Sales sales)
+        {
+            sqlConnection = new SqlConnection(connectionString);
+            // SELECT SUM(Quantity) AS TotalQuanity FROM Sales_Details where Product_Id = 5
+            commandString = @"select sum(Purchase_Details.Quantity) as purchaseTotal from Purchase_Details left join Product on Purchase_Details.Product_Id = Product.Id where Name='" + sales.ProductName + "' ";
             sqlCommand = new SqlCommand(commandString, sqlConnection);
             if (sqlConnection.State == ConnectionState.Closed)
             {
@@ -130,21 +173,19 @@ namespace SmallBusinessManagementApp.Repository
             reader = sqlCommand.ExecuteReader();
             while (reader.Read())
             {
-                availableQuantity = (reader["Quantity"]).ToString();
+                purchaseTotalQuantity = (reader["purchaseTotal"].ToString());
             }
-
             sqlConnection.Close();
-
-            return availableQuantity;
+            return purchaseTotalQuantity;
         }
         string MRP;
 
-        public string LoadMRP(Purchase purchase)
+        public string LoadMRP(Sales sales)
         {
-            sqlConnection =new SqlConnection(connectionString);
-            commandString = @"select Purchase_Details.MRP from Purchase_Details left join Product on Purchase_Details.Product_id = Product.Id where Product.Name = '" + purchase.ProductName + "'";
-            sqlCommand = new SqlCommand(commandString,sqlConnection);
-            if (sqlConnection.State==ConnectionState.Closed)
+            sqlConnection = new SqlConnection(connectionString);
+            commandString = @"select Purchase_Details.MRP from Purchase_Details left join Product on Purchase_Details.Product_id = Product.Id where Product.Name = '" + sales.ProductName + "'";
+            sqlCommand = new SqlCommand(commandString, sqlConnection);
+            if (sqlConnection.State == ConnectionState.Closed)
             {
                 sqlConnection.Open();
             }
@@ -179,6 +220,78 @@ namespace SmallBusinessManagementApp.Repository
 
             return isExecuted;
         }
+        public int addSale(Sales sales)
+        {
+            int isExecuted = 0;
+
+            commandString = "INSERT INTO Sales (Date1,Code,Customer_Id) VALUES ('"+sales.Date1+"','"+sales.Code+"',"+sales.Customer_Id+")";
+            sqlCommand = new SqlCommand(commandString, sqlConnection);
+
+            sqlConnection.Open();
+
+            isExecuted = sqlCommand.ExecuteNonQuery();
+
+            sqlConnection.Close();
+
+            return isExecuted;
+        }
+
+        string SaleId;
+
+        public string LoadSalesId(Sales sales)
+        {
+            sqlConnection = new SqlConnection(connectionString);
+            commandString = @"select Sales.Id from Sales left join Customer on Sales.Customer_Id = Customer.Id where Name='" + sales.CustomerName + "'";
+            sqlCommand = new SqlCommand(commandString, sqlConnection);
+            if (sqlConnection.State == ConnectionState.Closed)
+            {
+                sqlConnection.Open();
+            }
+
+            reader = sqlCommand.ExecuteReader();
+            while (reader.Read())
+            {
+                SaleId = (reader["Id"]).ToString();
+            }
+
+            sqlConnection.Close();
+
+            return SaleId;
+        }
+        public int Sell(Sales sales)
+        {
+            int isExecuted = 0;
+
+            commandString = @"INSERT INTO Sales_Details (Sales_Id,Product_Id,Quantity,MRP) VALUES (" + sales.Sales_Id +"," +sales.Product_Id+ ","+sales.Quantity+","+sales.MRP+")";
+            sqlCommand = new SqlCommand(commandString, sqlConnection);
+
+            sqlConnection.Open();
+
+            isExecuted = sqlCommand.ExecuteNonQuery();
+
+            sqlConnection.Close();
+
+            return isExecuted;
+        }
+
+        public int loyalityUpdate(Sales sales)
+        {
+            int isExecuted = 0;
+
+            commandString = @"update Customer set Loyality_Point="+sales.Loyality_Point+" where Name = '"+sales.CustomerName+"' ";
+            sqlCommand = new SqlCommand(commandString, sqlConnection);
+
+            sqlConnection.Open();
+
+            isExecuted = sqlCommand.ExecuteNonQuery();
+
+            sqlConnection.Close();
+
+            return isExecuted;
+        }
+
+
+
 
 
 
