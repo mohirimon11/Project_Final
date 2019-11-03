@@ -11,14 +11,16 @@ namespace SmallBusinessManagementApp.Repository
 {
     public class CategoryRepository
     {
+       // string connectionString = @"Server=DESKTOP-V33KTP1; Database=SMS_RAMPAGE; Integrated Security=True";
+       private SqlConnection sqlConnection;
+
         public bool Add(Category category)
         {
             bool isAdded = false;
             try
             {
                 //Connection
-                string connectionString = @"Server=DESKTOP-CR4IGJV; Database=SMS_RAMPAGE; Integrated Security=True";
-                SqlConnection sqlConnection = new SqlConnection(connectionString);
+                sqlConnection = new SqlConnection(System.Configuration.ConfigurationSettings.AppSettings["ConnectionString"]);
 
                 //Command 
 
@@ -66,8 +68,8 @@ namespace SmallBusinessManagementApp.Repository
         {
 
             //Connection
-            string connectionString = @"Server=DESKTOP-CR4IGJV; Database=SMS_RAMPAGE; Integrated Security=True";
-            SqlConnection sqlConnection = new SqlConnection(connectionString);
+            sqlConnection = new SqlConnection(System.Configuration.ConfigurationSettings.AppSettings["ConnectionString"]);
+
 
             //Command 
 
@@ -83,46 +85,7 @@ namespace SmallBusinessManagementApp.Repository
             DataTable dataTable = new DataTable();
             sqlDataAdapter.Fill(dataTable);
 
-            //With DataAdapter
-            //SqlDataReader sqlDataReader = sqlCommand.ExecuteReader();
-
-            //List<Customer> customers = new List<Customer>();
-
-            //while (sqlDataReader.Read())
-            //{
-            //    Customer customer = new Customer();
-            //    //District district = new District();
-            //    customer.Id = Convert.ToInt32(sqlDataReader["Id"]);
-            //    customer.Code = sqlDataReader["Code"].ToString();
-            //    customer.Name = sqlDataReader["Name"].ToString();
-            //    customer.Address = sqlDataReader["Address"].ToString();
-            //    customer.Contact = sqlDataReader["Contact"].ToString();
-            //    customer.District_Id =Convert.ToInt32(sqlDataReader["District_Id"]);
-            //    // district.Name = sqlDataReader["District_Name"].ToString();
-
-            //    customers.Add(customer);
-            //}
-            //if (sqlDataReader.NextResult())
-            //{
-            //    while (sqlDataReader.Read())
-            //    {
-            //        District district = new District();
-            //        district.Name = sqlDataReader["District_Name"].ToString();
-            //        //customers.Add(district);       
-            //    }
-            //}
-
-            //if (dataTable.Rows.Count > 0)
-            //{
-
-            //    //showDataGridView.DataSource = dataTable;
-            //}
-            //else
-            //{
-            //    //MessageBox.Show("No Data Found");
-            //}
-
-            //Close
+           
             sqlConnection.Close();
             //return dataTable;
             return dataTable;
@@ -134,8 +97,8 @@ namespace SmallBusinessManagementApp.Repository
             try
             {
                 //Connection
-                string connectionString = @"Server=DESKTOP-CR4IGJV; Database=SMS_RAMPAGE; Integrated Security=True";
-                SqlConnection sqlConnection = new SqlConnection(connectionString);
+                sqlConnection = new SqlConnection(System.Configuration.ConfigurationSettings.AppSettings["ConnectionString"]);
+
 
                 //Command 
                 //UPDATE Items SET Name =  'Hot' , Price = 130 WHERE ID = 1
@@ -167,8 +130,8 @@ namespace SmallBusinessManagementApp.Repository
         {
 
             //Connection
-            string connectionString = @"Server=DESKTOP-CR4IGJV; Database=SMS_RAMPAGE; Integrated Security=True";
-            SqlConnection sqlConnection = new SqlConnection(connectionString);
+            sqlConnection = new SqlConnection(System.Configuration.ConfigurationSettings.AppSettings["ConnectionString"]);
+
 
             //Command 
 
@@ -184,46 +147,7 @@ namespace SmallBusinessManagementApp.Repository
             DataTable dataTable = new DataTable();
             sqlDataAdapter.Fill(dataTable);
 
-            //With DataAdapter
-            //SqlDataReader sqlDataReader = sqlCommand.ExecuteReader();
-
-            //List<Customer> customers = new List<Customer>();
-
-            //while (sqlDataReader.Read())
-            //{
-            //    Customer customer = new Customer();
-            //    //District district = new District();
-            //    customer.Id = Convert.ToInt32(sqlDataReader["Id"]);
-            //    customer.Code = sqlDataReader["Code"].ToString();
-            //    customer.Name = sqlDataReader["Name"].ToString();
-            //    customer.Address = sqlDataReader["Address"].ToString();
-            //    customer.Contact = sqlDataReader["Contact"].ToString();
-            //    customer.District_Id =Convert.ToInt32(sqlDataReader["District_Id"]);
-            //    // district.Name = sqlDataReader["District_Name"].ToString();
-
-            //    customers.Add(customer);
-            //}
-            //if (sqlDataReader.NextResult())
-            //{
-            //    while (sqlDataReader.Read())
-            //    {
-            //        District district = new District();
-            //        district.Name = sqlDataReader["District_Name"].ToString();
-            //        //customers.Add(district);       
-            //    }
-            //}
-
-            //if (dataTable.Rows.Count > 0)
-            //{
-
-            //    //showDataGridView.DataSource = dataTable;
-            //}
-            //else
-            //{
-            //    //MessageBox.Show("No Data Found");
-            //}
-
-            //Close
+            
             sqlConnection.Close();
             //return dataTable;
             return dataTable;
@@ -237,8 +161,8 @@ namespace SmallBusinessManagementApp.Repository
             try
             {
                 //Connection
-                string connectionString = @"Server=DESKTOP-CR4IGJV; Database=SMS_RAMPAGE; Integrated Security=True";
-                SqlConnection sqlConnection = new SqlConnection(connectionString);
+                sqlConnection = new SqlConnection(System.Configuration.ConfigurationSettings.AppSettings["ConnectionString"]);
+
 
                 //Command 
                 //INSERT INTO Items (Name, Price) Values ('Black', 120)
@@ -273,8 +197,8 @@ namespace SmallBusinessManagementApp.Repository
             try
             {
                 //Connection
-                string connectionString = @"Server=DESKTOP-CR4IGJV; Database=SMS_RAMPAGE; Integrated Security=True";
-                SqlConnection sqlConnection = new SqlConnection(connectionString);
+                sqlConnection = new SqlConnection(System.Configuration.ConfigurationSettings.AppSettings["ConnectionString"]);
+
 
                 //Command 
                 //INSERT INTO Items (Name, Price) Values ('Black', 120)
@@ -309,8 +233,8 @@ namespace SmallBusinessManagementApp.Repository
             try
             {
                 //Connection
-                string connectionString = @"Server=DESKTOP-CR4IGJV; Database=SMS_RAMPAGE; Integrated Security=True";
-                SqlConnection sqlConnection = new SqlConnection(connectionString);
+                sqlConnection = new SqlConnection(System.Configuration.ConfigurationSettings.AppSettings["ConnectionString"]);
+
 
                 //Command 
                 //INSERT INTO Items (Name, Price) Values ('Black', 120)
@@ -344,8 +268,8 @@ namespace SmallBusinessManagementApp.Repository
             try
             {
                 //Connection
-                string connectionString = @"Server=DESKTOP-CR4IGJV; Database=SMS_RAMPAGE; Integrated Security=True";
-                SqlConnection sqlConnection = new SqlConnection(connectionString);
+                sqlConnection = new SqlConnection(System.Configuration.ConfigurationSettings.AppSettings["ConnectionString"]);
+
 
                 //Command 
                 //INSERT INTO Items (Name, Price) Values ('Black', 120)

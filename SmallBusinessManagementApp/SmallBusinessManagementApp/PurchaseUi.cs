@@ -20,7 +20,7 @@ namespace SmallBusinessManagementApp
         private Purchase purchase;
         private List<Purchase> purchasesList;
         private DataTable dataTable;
-        private int a = 0;
+        private int purchaseCode;
         private int PurchaseId;
 
         public PurchaseUi()
@@ -108,7 +108,7 @@ namespace SmallBusinessManagementApp
         }
         private void productsComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-
+            productsComboBox.Text = null;
             LoadProductCode();
             //LoadQuantity();
             LoadPreviousPrice();
@@ -118,7 +118,9 @@ namespace SmallBusinessManagementApp
         }
         private void supplierComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            LoadPurchaseId();
+            
+           addPurchase();
+           LoadPurchaseId();
         }
 
         private void LoadPurchaseId()
@@ -146,6 +148,10 @@ namespace SmallBusinessManagementApp
             purchase.ProductName = productsComboBox.Text;
             previousUnitPriceTextBox.Text = "0";
             previousUnitPriceTextBox.Text = _purchaseManager.LoadPreviousPrice(purchase);
+
+
+           
+
         }
 
         private void LoadPreviousMrp()
@@ -238,8 +244,8 @@ namespace SmallBusinessManagementApp
                     int quantity = Convert.ToInt32(quantityTextBox.Text);
                     totalPriceTextBox.Text = (unitPrice * quantity).ToString();
                     double totalPrice = Convert.ToDouble(totalPriceTextBox.Text);
-                    double mrp1 = totalPrice * 25 / 100;
-                    mrpTextBox.Text = Convert.ToString(mrp1 + totalPrice);
+                    double mrp1 = unitPrice * 25 / 100;
+                    mrpTextBox.Text = Convert.ToString(mrp1 + unitPrice);
                 }
 
             }
@@ -304,9 +310,11 @@ namespace SmallBusinessManagementApp
             
                // purchase.Date1 = Convert.ToDateTime(row.Cells["date1DataGridViewTextBoxColumn"].Value.ToString());
                purchase.Date1=DateTime.Now;
-               a++;
-               string text = "2019-00";
-               string code = text + Convert.ToInt32(a);
+            purchaseCode = Convert.ToInt32(_purchaseManager.purchaseCode(purchase));
+
+            purchaseCode++;
+              // string text = "2019-";
+               string code = /*text +*/ purchaseCode.ToString();
                purchase.Code = code;
                purchase.InvoiceNo = invoiceNoTextBox.Text;
                purchase.Supplier_id = Convert.ToInt32(supplierComboBox.SelectedValue);
@@ -340,10 +348,13 @@ namespace SmallBusinessManagementApp
 
         private void purchaseButton_Click(object sender, EventArgs e)
         {
-            addPurchase();
 
         }
 
-       
+        private void deleteButton_Click(object sender, EventArgs e)
+        {
+            int rowIndex = showDataGridView.CurrentCell.RowIndex;
+            showDataGridView.Rows.RemoveAt(rowIndex);
+        }
     }
 }

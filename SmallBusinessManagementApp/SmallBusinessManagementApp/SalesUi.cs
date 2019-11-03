@@ -22,11 +22,13 @@ namespace SmallBusinessManagementApp
         private Customer customer;
         private Purchase purchase;
         private int SalesId;
-        private int a;
+        private int CodeIncriment=0;
         private double g_Total;
         private double LPoint;
         private double discount;
         private double loyalityPoint;
+        int purchaseQuantity;
+        int salesQuantity;
 
 
 
@@ -96,7 +98,9 @@ namespace SmallBusinessManagementApp
                 {
                     MessageBox.Show(exception.Message);
                 }
-                discountTextBox.Text = discount.ToString();
+
+                int dis = Convert.ToInt32(discount);
+                discountTextBox.Text = dis.ToString();
                 discountAmounTextBox.Text = (g_Total * discount / 100).ToString();
                 double c = Convert.ToDouble(loyalityPointTextBox.Text) - Convert.ToDouble(discountTextBox.Text);
                 payableAmountTextBox.Text = (g_Total - Convert.ToDouble(discountAmounTextBox.Text)).ToString();
@@ -136,6 +140,7 @@ namespace SmallBusinessManagementApp
         }
         private void customerComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
+            addSale();
             LoyaLityPoint();
             LoadSaleId();
         }
@@ -155,23 +160,64 @@ namespace SmallBusinessManagementApp
             pTotalLable.Text = "";
             sTotalLable.Text = "";
             mrpTextBox.Text = "<View>";
+            availableQualityTextBox.Text = "<View>";
 
         }
         private void productComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
 
 
-            LoadQuantity(); 
-            
+            LoadQuantity();
+            try
+            {
+                if (String.IsNullOrEmpty(Convert.ToString(purchaseQuantity)))
+                {
+
+                }
+                purchaseQuantity = Convert.ToInt32(pTotalLable.Text);
+
+            }
+            catch (Exception exception)
+            {
+
+            }
+            try
+            {
+                if (String.IsNullOrEmpty(Convert.ToString(salesQuantity)))
+                {
+
+                }
+                salesQuantity = Convert.ToInt32(sTotalLable.Text);
+
+            }
+            catch (Exception exception)
+            {
+
+            }
+
+
+            int avalable = purchaseQuantity - salesQuantity;
+            availableQualityTextBox.Text = Convert.ToString(avalable);
+
             LoaMRP();
         }
 
-
+        int loypointTxt;
         private void LoyaLityPoint()
         {
             customer.Name = customerComboBox.Text;
             loyalityPointTextBox.Text = "0";
-            loyalityPointTextBox.Text = _salesManager.LoyaLityPoint(customer);
+            try
+            {
+                loypointTxt = Convert.ToInt32(_salesManager.LoyaLityPoint(customer));
+
+            }
+            catch (Exception e)
+            {
+                
+            }
+
+            loyalityPointTextBox.Text = loypointTxt.ToString();
         }
 
         private void LoadQuantity()
@@ -269,11 +315,8 @@ namespace SmallBusinessManagementApp
 
         private void loadTotalQuantityButton_Click(object sender, EventArgs e)
         {
-            LoadQuantity();
-            int a = Convert.ToInt32(pTotalLable.Text);
-            int b = Convert.ToInt32(sTotalLable.Text);
-            int avalable = a - b;
-            availableQualityTextBox.Text =Convert.ToString(avalable);
+            
+           
         }
         private void addSale()
         {
@@ -281,9 +324,10 @@ namespace SmallBusinessManagementApp
 
             // purchase.Date1 = Convert.ToDateTime(row.Cells["date1DataGridViewTextBoxColumn"].Value.ToString());
             sales.Date1 = DateTime.Now;
-            a++;
-            string text = "2019-00";
-            string code = text + Convert.ToInt32(a);
+            CodeIncriment = Convert.ToInt32(_salesManager.salesCode(sales));
+            CodeIncriment++;
+            //string text = "2019-";
+            string code =CodeIncriment.ToString();
             sales.Code = code;
            // purchase.InvoiceNo = invoiceNoTextBox.Text;
            sales.Customer_Id = Convert.ToInt32(customerComboBox.SelectedValue);
@@ -314,7 +358,7 @@ namespace SmallBusinessManagementApp
 
         private void saleAddButton_Click(object sender, EventArgs e)
         {
-            addSale();
+            
         }
 
         private void submitButton_Click(object sender, EventArgs e)

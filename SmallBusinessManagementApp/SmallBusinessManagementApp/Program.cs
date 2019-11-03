@@ -20,6 +20,7 @@ namespace SmallBusinessManagementApp
             //Application.Run(new PurchaseUi());
             // Application.Run(new CustomerUi());
             //Application.Run(new SalesUi());
+           // Application.Run(new ReportOnPurchaseUi());
         }
     }
 }

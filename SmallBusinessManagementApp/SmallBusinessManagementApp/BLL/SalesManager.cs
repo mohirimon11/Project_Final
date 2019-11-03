@@ -18,11 +18,6 @@ namespace SmallBusinessManagementApp.BLL
         {
             return _salesRepository.LoyaLityPoint(customer);
         }
-
-        public int PurchaseAdd(Sales sales)
-        {
-            return _salesRepository.PurchaseAdd(sales);
-        }
         public DataTable LoadCustomerLoad()
         {
             return _salesRepository.LoadCustomerLoad();
@@ -39,46 +34,34 @@ namespace SmallBusinessManagementApp.BLL
         {
             return _salesRepository.saleQuantity(sales);
         }
-
         public string PurchaseQuantity(Sales sales)
         {
             return _salesRepository.PurchaseQuantity(sales);
         }
-
-        //public string LoadQuantity(Purchase purchase)
-        //{
-        //    return _salesRepository.LoadQuantity(purchase);
-        //}
-
         public string LoadMRP(Sales sales)
         {
             return _salesRepository.LoadMRP(sales);
         }
-
         public int addSale(Sales sales)
         {
             return _salesRepository.addSale(sales);
         }
-
         public string LoadSalesId(Sales sales)
         {
             return _salesRepository.LoadSalesId(sales);
         }
-
         public int Sell(Sales sales)
         {
             return _salesRepository.Sell(sales);
         }
-
         public int loyalityUpdate(Sales sales)
         {
             return _salesRepository.loyalityUpdate(sales);
         }
-
-
-
-
-
+        public string salesCode(Sales sales)
+        {
+            return _salesRepository.salesCode(sales);
+        }
 
     }
 }

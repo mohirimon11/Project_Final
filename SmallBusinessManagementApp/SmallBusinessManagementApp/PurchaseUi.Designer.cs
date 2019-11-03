@@ -38,6 +38,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.warningLabel = new System.Windows.Forms.Label();
             this.purchaseButton = new System.Windows.Forms.Button();
             this.submitButton = new System.Windows.Forms.Button();
             this.ExpireDateTimePicker = new System.Windows.Forms.DateTimePicker();
@@ -90,7 +91,7 @@
             this.productidDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.productNameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.date2DataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.warningLabel = new System.Windows.Forms.Label();
+            this.deleteButton = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.supplierBindingSource)).BeginInit();
             this.groupBox2.SuspendLayout();
@@ -174,6 +175,7 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.deleteButton);
             this.groupBox2.Controls.Add(this.warningLabel);
             this.groupBox2.Controls.Add(this.purchaseButton);
             this.groupBox2.Controls.Add(this.submitButton);
@@ -210,6 +212,14 @@
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Products";
+            // 
+            // warningLabel
+            // 
+            this.warningLabel.AutoSize = true;
+            this.warningLabel.Location = new System.Drawing.Point(563, 66);
+            this.warningLabel.Name = "warningLabel";
+            this.warningLabel.Size = new System.Drawing.Size(0, 13);
+            this.warningLabel.TabIndex = 6;
             // 
             // purchaseButton
             // 
@@ -650,13 +660,15 @@
             this.date2DataGridViewTextBoxColumn.ReadOnly = true;
             this.date2DataGridViewTextBoxColumn.Visible = false;
             // 
-            // warningLabel
+            // deleteButton
             // 
-            this.warningLabel.AutoSize = true;
-            this.warningLabel.Location = new System.Drawing.Point(563, 66);
-            this.warningLabel.Name = "warningLabel";
-            this.warningLabel.Size = new System.Drawing.Size(0, 13);
-            this.warningLabel.TabIndex = 6;
+            this.deleteButton.Location = new System.Drawing.Point(655, 137);
+            this.deleteButton.Name = "deleteButton";
+            this.deleteButton.Size = new System.Drawing.Size(75, 23);
+            this.deleteButton.TabIndex = 7;
+            this.deleteButton.Text = "Delete";
+            this.deleteButton.UseVisualStyleBackColor = true;
+            this.deleteButton.Click += new System.EventHandler(this.deleteButton_Click);
             // 
             // PurchaseUi
             // 
@@ -746,5 +758,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn productNameDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn date2DataGridViewTextBoxColumn;
         private System.Windows.Forms.Label warningLabel;
+        private System.Windows.Forms.Button deleteButton;
     }
 }

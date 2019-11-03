@@ -11,15 +11,14 @@ namespace SmallBusinessManagementApp.Repository
 {
     public class ReportOnSalesRepository
     {
+        private SqlConnection sqlConnection;
         public DataTable Search(Sales sales)
         {
 
             //Connection
-            string connectionString = @"Server=DESKTOP-CR4IGJV; Database=SMS_RAMPAGE; Integrated Security=True";
-            SqlConnection sqlConnection = new SqlConnection(connectionString);
+            sqlConnection = new SqlConnection(System.Configuration.ConfigurationSettings.AppSettings["ConnectionString"]);
 
             //Command 
-
             string commandString = @"SELECT Category.Name AS Category, Product.Code ,Product.Name As Product, SUM(Sales_Details.Quantity) AS Sold_Qty,
 SUM(Sales_Details.Quantity)*(SELECT SUM(Unit_Price) FROM Purchase_Details WHERE Purchase_Details.Product_Id=Sales_Details.Product_Id GROUP BY Purchase_Details.Product_Id)/COUNT(*) AS CP,
 SUM(Sales_Details.Quantity)*(SELECT SUM(MRP) FROM Purchase_Details WHERE Purchase_Details.Product_Id=Sales_Details.Product_Id GROUP BY Purchase_Details.Product_Id)/COUNT(*) AS Sales_Price,
@@ -38,46 +37,6 @@ LEFT JOIN Sales ON Sales_Details.Sales_Id=Sales.Id WHERE Sales.Date1>='"+sales.D
             DataTable dataTable = new DataTable();
             sqlDataAdapter.Fill(dataTable);
 
-            //With DataAdapter
-            //SqlDataReader sqlDataReader = sqlCommand.ExecuteReader();
-
-            //List<Customer> customers = new List<Customer>();
-
-            //while (sqlDataReader.Read())
-            //{
-            //    Customer customer = new Customer();
-            //    //District district = new District();
-            //    customer.Id = Convert.ToInt32(sqlDataReader["Id"]);
-            //    customer.Code = sqlDataReader["Code"].ToString();
-            //    customer.Name = sqlDataReader["Name"].ToString();
-            //    customer.Address = sqlDataReader["Address"].ToString();
-            //    customer.Contact = sqlDataReader["Contact"].ToString();
-            //    customer.District_Id =Convert.ToInt32(sqlDataReader["District_Id"]);
-            //    // district.Name = sqlDataReader["District_Name"].ToString();
-
-            //    customers.Add(customer);
-            //}
-            //if (sqlDataReader.NextResult())
-            //{
-            //    while (sqlDataReader.Read())
-            //    {
-            //        District district = new District();
-            //        district.Name = sqlDataReader["District_Name"].ToString();
-            //        //customers.Add(district);       
-            //    }
-            //}
-
-            //if (dataTable.Rows.Count > 0)
-            //{
-
-            //    //showDataGridView.DataSource = dataTable;
-            //}
-            //else
-            //{
-            //    //MessageBox.Show("No Data Found");
-            //}
-
-            //Close
             sqlConnection.Close();
             //return dataTable;
             return dataTable;

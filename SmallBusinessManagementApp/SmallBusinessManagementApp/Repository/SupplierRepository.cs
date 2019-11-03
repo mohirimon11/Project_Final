@@ -17,7 +17,7 @@ namespace SmallBusinessManagementApp.Repository
             try
             {
                 //Connection
-                string connectionString = @"Server=DESKTOP-CR4IGJV; Database=SMS_RAMPAGE; Integrated Security=True";
+                string connectionString = @"Server=DESKTOP-V33KTP1; Database=SMS_RAMPAGE; Integrated Security=True";
                 SqlConnection sqlConnection = new SqlConnection(connectionString);
 
                 //Command 
@@ -66,7 +66,7 @@ namespace SmallBusinessManagementApp.Repository
         {
 
             //Connection
-            string connectionString = @"Server=DESKTOP-CR4IGJV; Database=SMS_RAMPAGE; Integrated Security=True";
+            string connectionString = @"Server=DESKTOP-V33KTP1; Database=SMS_RAMPAGE; Integrated Security=True";
             SqlConnection sqlConnection = new SqlConnection(connectionString);
 
             //Command 
@@ -134,7 +134,7 @@ namespace SmallBusinessManagementApp.Repository
             try
             {
                 //Connection
-                string connectionString = @"Server=DESKTOP-CR4IGJV; Database=SMS_RAMPAGE; Integrated Security=True";
+                string connectionString = @"Server=DESKTOP-V33KTP1; Database=SMS_RAMPAGE; Integrated Security=True";
                 SqlConnection sqlConnection = new SqlConnection(connectionString);
 
                 //Command 
@@ -167,7 +167,7 @@ namespace SmallBusinessManagementApp.Repository
         {
 
             //Connection
-            string connectionString = @"Server=DESKTOP-CR4IGJV; Database=SMS_RAMPAGE; Integrated Security=True";
+            string connectionString = @"Server=DESKTOP-V33KTP1; Database=SMS_RAMPAGE; Integrated Security=True";
             SqlConnection sqlConnection = new SqlConnection(connectionString);
 
             //Command 
@@ -236,7 +236,7 @@ namespace SmallBusinessManagementApp.Repository
             try
             {
                 //Connection
-                string connectionString = @"Server=DESKTOP-CR4IGJV; Database=SMS_RAMPAGE; Integrated Security=True";
+                string connectionString = @"Server=DESKTOP-V33KTP1; Database=SMS_RAMPAGE; Integrated Security=True";
                 SqlConnection sqlConnection = new SqlConnection(connectionString);
 
                 //Command 
@@ -272,7 +272,7 @@ namespace SmallBusinessManagementApp.Repository
             try
             {
                 //Connection
-                string connectionString = @"Server=DESKTOP-CR4IGJV; Database=SMS_RAMPAGE; Integrated Security=True";
+                string connectionString = @"Server=DESKTOP-V33KTP1; Database=SMS_RAMPAGE; Integrated Security=True";
                 SqlConnection sqlConnection = new SqlConnection(connectionString);
 
                 //Command 
@@ -308,7 +308,7 @@ namespace SmallBusinessManagementApp.Repository
             try
             {
                 //Connection
-                string connectionString = @"Server=DESKTOP-CR4IGJV; Database=SMS_RAMPAGE; Integrated Security=True";
+                string connectionString = @"Server=DESKTOP-V33KTP1; Database=SMS_RAMPAGE; Integrated Security=True";
                 SqlConnection sqlConnection = new SqlConnection(connectionString);
 
                 //Command 
@@ -344,7 +344,7 @@ namespace SmallBusinessManagementApp.Repository
             try
             {
                 //Connection
-                string connectionString = @"Server=DESKTOP-CR4IGJV; Database=SMS_RAMPAGE; Integrated Security=True";
+                string connectionString = @"Server=DESKTOP-V33KTP1; Database=SMS_RAMPAGE; Integrated Security=True";
                 SqlConnection sqlConnection = new SqlConnection(connectionString);
 
                 //Command 
@@ -380,7 +380,7 @@ namespace SmallBusinessManagementApp.Repository
             try
             {
                 //Connection
-                string connectionString = @"Server=DESKTOP-CR4IGJV; Database=SMS_RAMPAGE; Integrated Security=True";
+                string connectionString = @"Server=DESKTOP-V33KTP1; Database=SMS_RAMPAGE; Integrated Security=True";
                 SqlConnection sqlConnection = new SqlConnection(connectionString);
 
                 //Command 
@@ -416,7 +416,7 @@ namespace SmallBusinessManagementApp.Repository
             try
             {
                 //Connection
-                string connectionString = @"Server=DESKTOP-CR4IGJV; Database=SMS_RAMPAGE; Integrated Security=True";
+                string connectionString = @"Server=DESKTOP-V33KTP1; Database=SMS_RAMPAGE; Integrated Security=True";
                 SqlConnection sqlConnection = new SqlConnection(connectionString);
 
                 //Command 

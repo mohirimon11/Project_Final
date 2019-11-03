@@ -70,5 +70,10 @@ namespace SmallBusinessManagementApp.BLL
             return _purchaseRepository.addPurchase(purchase);
         }
 
+        public string purchaseCode(Purchase purchase)
+        {
+            return _purchaseRepository.purchaseCode(purchase);
+        }
+
     }
 }

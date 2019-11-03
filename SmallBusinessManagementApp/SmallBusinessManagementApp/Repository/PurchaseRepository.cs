@@ -11,7 +11,7 @@ namespace SmallBusinessManagementApp.Repository
 {
     public class PurchaseRepository
     {
-        public string connectionString = @"Server=DESKTOP-CR4IGJV; Database=SMS_RAMPAGE; Integrated Security=True";
+        //public string connectionString = @"Server=DESKTOP-V33KTP1; Database=SMS_RAMPAGE; Integrated Security=True";
 
         SqlConnection sqlConnection;
         private string commandString;
@@ -20,7 +20,7 @@ namespace SmallBusinessManagementApp.Repository
 
         public DataTable LoadCatagory()
         {
-            sqlConnection = new SqlConnection(connectionString);
+            sqlConnection = new SqlConnection(System.Configuration.ConfigurationSettings.AppSettings["ConnectionString"]);
             commandString = @"SELECT * FROM Category";
             sqlCommand =new SqlCommand(commandString, sqlConnection);
 
@@ -40,7 +40,7 @@ namespace SmallBusinessManagementApp.Repository
 
         public DataTable LoadProducts()
         {
-            sqlConnection = new SqlConnection(connectionString);
+            sqlConnection = new SqlConnection(System.Configuration.ConfigurationSettings.AppSettings["ConnectionString"]);
             commandString = @"SELECT * FROM Product";
             sqlCommand= new SqlCommand(commandString,sqlConnection);
 
@@ -59,7 +59,7 @@ namespace SmallBusinessManagementApp.Repository
         string PurchaseId;
         public string LoadPurchaseId(Purchase purchase)
         {
-            sqlConnection = new SqlConnection(connectionString);
+            sqlConnection = new SqlConnection(System.Configuration.ConfigurationSettings.AppSettings["ConnectionString"]);
             commandString = @"select Purchase.Id from Purchase left join Supplier on Purchase.Supplier_Id = Supplier.Id where Name='"+purchase.SupplierName+"'";
             sqlCommand=new SqlCommand(commandString,sqlConnection);
             if (sqlConnection.State == ConnectionState.Closed)
@@ -81,7 +81,7 @@ namespace SmallBusinessManagementApp.Repository
         string previousPrice;
         public string LoadPreviousPrice(Purchase purchase)
         {
-            sqlConnection= new SqlConnection(connectionString);
+            sqlConnection = new SqlConnection(System.Configuration.ConfigurationSettings.AppSettings["ConnectionString"]);
             commandString = @"select Purchase_Details.Unit_Price from Purchase_Details left join Product on Purchase_Details.Product_id = Product.Id where Product.Name = '" + purchase.ProductName + "'";
             sqlCommand=new SqlCommand(commandString,sqlConnection);
             if (sqlConnection.State == ConnectionState.Closed)
@@ -104,7 +104,7 @@ namespace SmallBusinessManagementApp.Repository
 
         public string LoadPreviousMrp(Purchase purchase)
         {
-            sqlConnection =new SqlConnection(connectionString);
+            sqlConnection = new SqlConnection(System.Configuration.ConfigurationSettings.AppSettings["ConnectionString"]);
             commandString = @"select Purchase_Details.MRP from Purchase_Details left join Product on Purchase_Details.Product_id = Product.Id where Product.Name = '" + purchase.ProductName + "'";
             sqlCommand =new SqlCommand(commandString,sqlConnection);
             if (sqlConnection.State==ConnectionState.Closed)
@@ -125,7 +125,7 @@ namespace SmallBusinessManagementApp.Repository
 
         public DataTable LoadSupplier()
         {
-            sqlConnection= new SqlConnection(connectionString);
+            sqlConnection = new SqlConnection(System.Configuration.ConfigurationSettings.AppSettings["ConnectionString"]);
             commandString = @"SELECT * FROM Supplier";
             sqlCommand = new SqlCommand(commandString,sqlConnection);
             if (sqlConnection.State==ConnectionState.Closed)
@@ -142,7 +142,7 @@ namespace SmallBusinessManagementApp.Repository
         string productCode;
         public string LoadProductCode(Product product)
         {
-            sqlConnection = new SqlConnection(connectionString);
+            sqlConnection = new SqlConnection(System.Configuration.ConfigurationSettings.AppSettings["ConnectionString"]);
             commandString = @"SELECT Code FROM Product WHERE Name='"+product.Name+"' ";
             sqlCommand = new SqlCommand(commandString,sqlConnection);
             if (sqlConnection.State==ConnectionState.Closed)
@@ -225,7 +225,7 @@ namespace SmallBusinessManagementApp.Repository
 
         public DataTable PurchaseLoad()
         {
-            sqlConnection = new SqlConnection(connectionString);
+            sqlConnection = new SqlConnection(System.Configuration.ConfigurationSettings.AppSettings["ConnectionString"]);
             commandString = @"SELECT  FROM Purchase";
             sqlCommand = new SqlCommand(commandString, sqlConnection);
 
@@ -237,6 +237,27 @@ namespace SmallBusinessManagementApp.Repository
             DataTable dataTable = new DataTable();
             dataAdapter.Fill(dataTable);
             return dataTable;
+        }
+
+        string PurchaseCode;
+
+        public string purchaseCode(Purchase purchase)
+        {
+            sqlConnection = new SqlConnection(System.Configuration.ConfigurationSettings.AppSettings["ConnectionString"]);
+            commandString = @"select Code from Purchase";
+            sqlCommand = new SqlCommand(commandString, sqlConnection);
+            if (sqlConnection.State == ConnectionState.Closed)
+            {
+                sqlConnection.Open();
+            }
+
+            reader = sqlCommand.ExecuteReader();
+            while (reader.Read())
+            {
+                PurchaseCode = (reader["Code"]).ToString();
+            }
+            sqlConnection.Close();
+            return PurchaseCode;
         }
 
 

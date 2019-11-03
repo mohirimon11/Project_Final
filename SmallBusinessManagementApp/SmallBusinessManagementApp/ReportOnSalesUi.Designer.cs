@@ -81,9 +81,11 @@
             // 
             // showDataGridView
             // 
+            this.showDataGridView.AllowUserToAddRows = false;
             this.showDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.showDataGridView.Location = new System.Drawing.Point(124, 133);
             this.showDataGridView.Name = "showDataGridView";
+            this.showDataGridView.ReadOnly = true;
             this.showDataGridView.Size = new System.Drawing.Size(509, 189);
             this.showDataGridView.TabIndex = 3;
             // 
